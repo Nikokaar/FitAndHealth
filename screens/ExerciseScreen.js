@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function HomeScreen() {
+export default function ExerciseScreen() {
     return (
         <View style={styles.container}>
             <Text>Your exercices will be shown here</Text>
