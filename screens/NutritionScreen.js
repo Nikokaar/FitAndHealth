@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
 
 export default function NutritionScreen() {
     const [keyword, setKeyword] = useState("");
     const [foods, setFoods] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    console.log(foods);
+
 
     const handleFetch = () => {
         setLoading(true);
@@ -27,19 +28,23 @@ export default function NutritionScreen() {
 
     return (
         <View style={styles.container}>
-            <Text>Your nutrition details will be shown here</Text>
+            <Text>You can search and add your daily meals here</Text>
             <TextInput
+                style={{ width: 300, marginBlock: 10 }}
+                label="keyword"
+                mode="outlined"
                 placeholder='Search for food'
                 value={keyword}
                 onChangeText={text => setKeyword(text)}
             />
             <Button
-                title='Search'
+                loading={loading}
+                mode="contained"
+                icon="search-web"
                 onPress={handleFetch}
-                disabled={loading}
-            />
-
-            {loading && <ActivityIndicator size="large" />}
+            >
+                Search
+            </Button>
 
             <FlatList
                 data={foods}
