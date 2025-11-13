@@ -3,7 +3,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./screens/HomeScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import ExerciseScreen from "./screens/ExerciseScreen";
-import NutritionScreen from "./screens/NutritionScreen";
+// import NutritionScreen from "./screens/NutritionScreen";
+// import NutritionDetailsScreen from "./screens/NutritionDetailsSreen";
+import NutritionStackScreen from "./screens/NutritionStackScreen";
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -37,7 +39,7 @@ export default function FitAndHealth() {
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Exercises" component={ExerciseScreen} />
-        <Tab.Screen name="Nutrition" component={NutritionScreen} />
+        <Tab.Screen name="Nutrition" component={NutritionStackScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer >

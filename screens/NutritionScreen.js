@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
+import { TextInput, Button, Card } from 'react-native-paper';
 
-export default function NutritionScreen() {
+
+export default function NutritionScreen({ navigation }) {
     const [keyword, setKeyword] = useState("");
     const [foods, setFoods] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -26,6 +27,10 @@ export default function NutritionScreen() {
             .finally(() => setLoading(false));
     }
 
+    const handlePress = (item) => {
+        navigation.navigate('NutritionDetails', { item });
+    }
+
     return (
         <View style={styles.container}>
             <Text>You can search and add your daily meals here</Text>
@@ -47,12 +52,17 @@ export default function NutritionScreen() {
             </Button>
 
             <FlatList
+                style={{ width: '90%', marginTop: 10 }}
                 data={foods}
                 renderItem={({ item }) => (
-                    <View style={{ margin: 15 }}>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{item.name.fi}</Text>
-                        <Text>{item.type.description.fi}</Text>
-                    </View>
+                    <Pressable onPress={() => handlePress(item)}>
+                        <Card style={{ margin: 15, fontSize: 20, fontWeight: 'bold' }}>
+                            <Card.Title title={item.name.fi} />
+                            <Card.Content>
+                                <Text>{item.type.description.fi}</Text>
+                            </Card.Content>
+                        </Card>
+                    </Pressable>
                 )}
             />
         </View>

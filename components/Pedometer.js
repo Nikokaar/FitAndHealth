@@ -10,7 +10,7 @@ export default function PedoMeter() {
 
     const subscribe = async () => {
         const { status } = await Pedometer.requestPermissionsAsync();
-
+        console.log({ status });
         if (status === 'granted') {
             const isAvailable = await Pedometer.isAvailableAsync();
             setIsPedometerAvailable(String(isAvailable));
