@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
 import { TextInput, Button, Card } from 'react-native-paper';
 
 
+
 export default function NutritionScreen({ navigation }) {
     const [keyword, setKeyword] = useState("");
     const [foods, setFoods] = useState([]);
@@ -30,6 +31,8 @@ export default function NutritionScreen({ navigation }) {
     const handlePress = (item) => {
         navigation.navigate('NutritionDetails', { item });
     }
+
+
 
     return (
         <View style={styles.container}>
