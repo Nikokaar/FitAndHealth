@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Text, TextInput, Button } from "react-native-paper";
-import { View, StyleSheet, Alert, FlatList } from "react-native";
+import { View, Alert, FlatList } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { styles } from "../styles/styles";
 
 
 
@@ -11,14 +12,20 @@ export default function NutritionDetailsScreen({ route }) {
     // const [kcal, setKcal] = useState('');
     const [foodData, setFoodData] = useState([]);
 
-    // console.log({ item });
+    console.log({ item });
 
     const handleSave = async (amount) => {
         const totalKcal = Number(amount) * item.energyKcal / 100;
+        const totalCarboHydrate = Number(amount) * item.carbohydrate / 100;
+        const totalFat = Number(amount) * item.fat / 100;
+        const totalProtein = Number(amount) * item.protein / 100;
         const foodEntry = {
             Name: item.name.fi,
             amount: amount,
             totalKcal: totalKcal.toFixed(0),
+            totalProtein: totalProtein.toFixed(0),
+            totalCarboHydrate: totalCarboHydrate.toFixed(0),
+            totalFat: totalFat.toFixed(0),
             timeStamp: Date.now(),
         };
 
@@ -92,11 +99,3 @@ export default function NutritionDetailsScreen({ route }) {
 }
 
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});

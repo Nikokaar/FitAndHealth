@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
+import { styles } from "../styles/styles";
 
 export default function HomeScreen() {
 
@@ -31,13 +32,17 @@ export default function HomeScreen() {
             <Text>Welcome to FitAndHealth App!</Text>
             <Text>Foods eaten today:</Text>
             <FlatList
-                style={{ width: '90%', marginTop: 10 }}
+                style={{ width: '90%' }}
                 data={foodData}
                 renderItem={({ item }) => (
                     <View style={{ marginTop: 20 }}>
+                        <Text>{new Date(item.timeStamp).toLocaleString()}</Text>
                         <Text>{item.Name}</Text>
                         <Text>Amount: {item.amount} g</Text>
                         <Text>Total kcal: {item.totalKcal}</Text>
+                        <Text>Protein: {item.totalProtein}</Text>
+                        <Text>Carbohydrates: {item.totalCarboHydrate}</Text>
+                        <Text>Fat: {item.totalFat}</Text>
                     </View>
                 )}
 
@@ -46,12 +51,3 @@ export default function HomeScreen() {
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: 20,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});

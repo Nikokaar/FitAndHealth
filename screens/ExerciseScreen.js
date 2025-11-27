@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import PedoMeter from '../components/Pedometer';
+import { styles } from "../styles/styles";
 
 export default function ExerciseScreen() {
     return (
@@ -10,11 +11,3 @@ export default function ExerciseScreen() {
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
