@@ -42,7 +42,7 @@ export default function NutritionScreen({ navigation }) {
                 style={{ width: 300, marginBlock: 10 }}
                 label="keyword"
                 mode="outlined"
-                placeholder='Search for food'
+                placeholder='Etsi ruokia tai juomia'
                 value={keyword}
                 onChangeText={text => setKeyword(text)}
             />
