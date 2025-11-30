@@ -5,13 +5,13 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
     },
     divider: {
         marginVertical: 8,
     },
     dividerText: {
-        fontSize: 20,           // tekstin koko
+        fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 8,
     },
@@ -19,9 +19,17 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 5,
+        paddingHorizontal: 10,
         marginBottom: 10,
         marginTop: 10,
+    },
+
+    picker: {
+        borderWidth: 1,
+        borderRadius: 10,
+        backgroundColor: 'grey',
+        width: '80%',
+        //marginBottom: 450
     }
 
 });

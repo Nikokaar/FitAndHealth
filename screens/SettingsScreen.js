@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { View } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, Alert } from 'react-native';
 import { styles } from "../styles/styles";
 import { Dialog, Divider, Text, TextInput, Button, Portal } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function SettingsScreen() {
 
 
-
+    const [name, setName] = useState('Nimesi')
     const [sex, setSex] = useState('Valitse');
     const [age, setAge] = useState('Valitse');
     const [height, setHeight] = useState('Valitse');
@@ -42,13 +42,69 @@ export default function SettingsScreen() {
     };
     const hideWeightDialog = () => setWeightDialogVisible(false);
 
+    // Function to save user data
+    const saveUserData = async () => {
+        const userData = {
+            name: name,
+            sex: sex,
+            age: age,
+            height: height,
+            weight: weight
+        };
+
+        try {
+            await AsyncStorage.setItem('userData', JSON.stringify(userData));
+            alert('Tiedot tallennettu')
+        } catch (error) {
+            Alert.alert('Error when saving data');
+        }
+    };
+
+    // Function to read user Data from Async-storage
+    const readUserData = async () => {
+        try {
+            const jsonValue = await AsyncStorage.getItem('userData');
+            if (jsonValue != null) {
+                const userData = JSON.parse(jsonValue);
+                setName(userData.name || 'Nimesi');
+                setSex(userData.sex || 'Valitse');
+                setAge(userData.age || 'Valitse');
+                setHeight(userData.height || 'Valitse');
+                setWeight(userData.weight || 'Valitse');
+            }
+        } catch (error) {
+            Alert.alert('Error when reading data');
+        }
+    }
+
+    useEffect(() => {
+        readUserData();
+    }, []);
+
+
+
 
 
 
 
     return (
+
+
         <View style={styles.divider}>
 
+            <View style={styles.row}>
+                <Text style={styles.dividerText}>Nimesi</Text>
+                <TextInput
+                    style={{ width: 200, marginBlock: 10 }}
+                    label="Nimi"
+                    mode="outlined"
+                    keyboardType="default"
+                    placeholder='Nimesi'
+                    value={name}
+                    onChangeText={text => setName(text)}
+                />
+            </View>
+            <Divider />
             <View style={styles.row}>
                 <Text style={styles.dividerText}>Sukupuoli</Text>
                 <Button
@@ -173,8 +229,20 @@ export default function SettingsScreen() {
                     </Dialog>
                 </Portal>
             </View>
+            <View style={{ alignItems: 'center', marginTop: 20 }}>
+                <Button
+                    style={{ alignItems: 'center' }}
+                    mode="contained"
+
+                    onPress={saveUserData}
+                >
+                    Tallenna
+                </Button>
+
+            </View>
             <Divider />
         </View>
+
     );
 }
 

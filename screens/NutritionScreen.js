@@ -37,7 +37,7 @@ export default function NutritionScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text>You can search and add your daily meals here</Text>
+            <Text>Lisää syömäsi ruoat tätä kautta</Text>
             <TextInput
                 style={{ width: 300, marginBlock: 10 }}
                 label="keyword"

@@ -9,7 +9,6 @@ import { styles } from "../styles/styles";
 export default function NutritionDetailsScreen({ route }) {
     const { item } = route.params;
     const [amount, setAmount] = useState('');
-    // const [kcal, setKcal] = useState('');
     const [foodData, setFoodData] = useState([]);
 
     console.log({ item });

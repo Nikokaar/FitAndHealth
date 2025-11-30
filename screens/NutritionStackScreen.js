@@ -10,7 +10,7 @@ export default function NutritionStackScreen() {
         <NutritionStack.Navigator
             screenOptions={{ headerShown: false }}
         >
-            <NutritionStack.Screen name="Nutrition" component={NutritionScreen} />
+            <NutritionStack.Screen name="Nutrition2" component={NutritionScreen} />
             <NutritionStack.Screen name="NutritionDetails" component={NutritionDetailsScreen} />
         </NutritionStack.Navigator>
 
