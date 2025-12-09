@@ -20,7 +20,7 @@ export default function ExerciseScreen() {
 
         const updatedExercises = [entry, ...exercises]
         setExercises(updatedExercises);
-        console.log(entry);
+        console.log(exercises);
 
         handleSave = async () => {
             try {

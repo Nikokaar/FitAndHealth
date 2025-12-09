@@ -28,8 +28,12 @@ export default function NutritionDetailsScreen({ route }) {
             timeStamp: Date.now(),
         };
 
+        const updatedFoodList = [foodEntry, ...foodData]
+        setFoodData(updatedFoodList);
+        console.log(foodData);
+
         try {
-            await AsyncStorage.setItem('foodEntry', JSON.stringify(foodEntry));
+            await AsyncStorage.setItem('foodData', JSON.stringify(updatedFoodList));
             Alert.alert('Saved successfully!');
         } catch (error) {
             Alert.alert('Error when saving data');
@@ -46,10 +50,9 @@ export default function NutritionDetailsScreen({ route }) {
 
     const handleRead = async () => {
         try {
-            const jsonValue = await AsyncStorage.getItem('foodEntry');
+            const jsonValue = await AsyncStorage.getItem('foodData');
             if (jsonValue != null) {
-                const foodEntry = JSON.parse(jsonValue);
-                setFoodData([foodEntry]);
+                setFoodData(JSON.parse(jsonValue));
             }
         } catch (error) {
             Alert.alert('Error when reading data');
