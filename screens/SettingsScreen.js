@@ -13,6 +13,8 @@ export default function SettingsScreen() {
     const [age, setAge] = useState('Valitse');
     const [height, setHeight] = useState('Valitse');
     const [weight, setWeight] = useState('Valitse');
+    const [bmr, setBmr] = useState(null);
+
 
     const [sexDialogVisible, setSexDialogVisible] = useState(false);
     const [ageDialogVisible, setAgeDialogVisible] = useState(false);
@@ -44,12 +46,15 @@ export default function SettingsScreen() {
 
     // Function to save user data
     const saveUserData = async () => {
+        const bmrValue = calculateBmr();
+
         const userData = {
             name: name,
             sex: sex,
             age: age,
             height: height,
-            weight: weight
+            weight: weight,
+            bmr: bmrValue,
         };
 
         try {
@@ -58,6 +63,14 @@ export default function SettingsScreen() {
         } catch (error) {
             Alert.alert('Error when saving data');
         }
+    };
+
+    const calculateBmr = () => {
+        if (sex === "Mies")
+            setBmr(10 * Number(weight) + 6.25 * Number(height) - 5 * Number(age) + 5)
+        else if (sex === "Nainen")
+            setBmr(10 * Number(weight) + 6.25 * Number(height) - 5 * Number(age) - 161);
+
     };
 
     // Function to read user Data from Async-storage
@@ -71,6 +84,10 @@ export default function SettingsScreen() {
                 setAge(userData.age || 'Valitse');
                 setHeight(userData.height || 'Valitse');
                 setWeight(userData.weight || 'Valitse');
+                setBmr(userData.bmr || null);
+
+                const bmrValue = calculateBmr(userData.sex, userData.weight, userData.height, userData.age);
+                setBmr(bmrValue);
             }
         } catch (error) {
             Alert.alert('Error when reading data');
@@ -241,6 +258,7 @@ export default function SettingsScreen() {
 
             </View>
             <Divider />
+            <Text>Peruskulutuksesi on: {bmr} Kcal</Text>
         </View>
 
     );
